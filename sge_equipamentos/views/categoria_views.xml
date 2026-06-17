@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sge_equipamento_categoria_tree" model="ir.ui.view">
+        <field name="name">sge.equipamento.categoria.tree</field>
+        <field name="model">sge.equipamento.categoria</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="descricao"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sge_equipamento_categoria_form" model="ir.ui.view">
+        <field name="name">sge.equipamento.categoria.form</field>
+        <field name="model">sge.equipamento.categoria</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="descricao"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sge_equipamento_categoria" model="ir.actions.act_window">
+        <field name="name">Categorias</field>
+        <field name="res_model">sge.equipamento.categoria</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_sge_root"
+        name="SGE Equipamentos"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_sge_equipamento_categoria"
+        name="Categorias"
+        parent="menu_sge_root"
+        action="action_sge_equipamento_categoria"
+        sequence="20"
+    />
+
+</odoo>

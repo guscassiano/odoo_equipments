@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sge_equipamento_tree" model="ir.ui.view">
+        <field name="name">sge.equipamento.tree</field>
+        <field name="model">sge.equipamento</field>
+        <field name="arch" type="xml">
+            <tree decoration-warning="estado == 'emprestado'" decoration-muted="estado == 'manutencao'">
+                <field name="name"/>
+                <field name="serial_number"/>
+                <field name="categoria_id"/>
+                <field name="estado" widget="badge" decoration-info="estado == 'disponivel'" decoration-warning="estado == 'emprestado'" decoration-muted="estado == 'manutencao'"/>
+                <field name="responsavel_atual_id"/>
+                <field name="data_aquisicao"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_sge_equipamento_form" model="ir.ui.view">
+        <field name="name">sge.equipamento.form</field>
+        <field name="model">sge.equipamento</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Identificação">
+                            <field name="name"/>
+                            <field name="serial_number"/>
+                            <field name="categoria_id"/>
+                            <field name="data_aquisicao"/>
+                        </group>
+                        <group string="Status">
+                            <field name="responsavel_atual_id"/>
+                            <field name="data_emprestimo"/>
+                            <field name="estado" widget="selection"/>
+                            <button
+                                name="action_devolver"
+                                string="Devolver Equipamento"
+                                type="object"
+                                class="btn-primary"
+                                invisible="estado != &quot;emprestado&quot;"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sge_equipamento" model="ir.actions.act_window">
+        <field name="name">Equipamentos</field>
+        <field name="res_model">sge.equipamento</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_sge_equipamento"
+        name="Equipamentos"
+        parent="menu_sge_root"
+        action="action_sge_equipamento"
+        sequence="10"
+    />
+
+</odoo>
