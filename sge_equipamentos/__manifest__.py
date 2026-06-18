@@ -22,6 +22,7 @@
         "security/ir.model.access.csv",
         "views/categoria_views.xml",
         "views/equipamento_views.xml",
+        "reports/equipment_report_template.xml",
     ],
     "installable": True,
     "application": True,

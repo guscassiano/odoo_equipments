@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Template QWeb do relatório -->
+    <template id="report_sge_equipamento_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Relatório de Equipamentos</h2>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Serial</th>
+                                <th>Categoria</th>
+                                <th>Estado</th>
+                                <th>Responsável</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="docs" t-as="eq">
+                                <td><span t-field="eq.name"/></td>
+                                <td><span t-field="eq.serial_number"/></td>
+                                <td><span t-field="eq.categoria_id"/></td>
+                                <td>
+                                    <span t-if="eq.estado == 'disponivel'"
+                                          style="color: green;">Disponível</span>
+                                    <span t-if="eq.estado == 'emprestado'"
+                                          style="color: orange;">Emprestado</span>
+                                    <span t-if="eq.estado == 'manutencao'"
+                                          style="color: red;">Manutenção</span>
+                                </td>
+                                <td><span t-field="eq.responsavel_atual_id"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <!-- Action do relatório (substitui a tag <report> que não existe no schema do Odoo 17) -->
+    <record id="action_report_sge_equipamento" model="ir.actions.report">
+        <field name="name">Relatório de Equipamentos</field>
+        <field name="model">sge.equipamento</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sge_equipamentos.report_sge_equipamento_document</field>
+        <field name="report_file">sge_equipamentos.report_sge_equipamento_document</field>
+        <field name="print_report_name">'Relatório de Equipamentos'</field>
+        <field name="binding_model_id" ref="model_sge_equipamento"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>
