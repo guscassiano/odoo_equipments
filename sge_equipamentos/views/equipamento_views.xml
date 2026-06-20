@@ -35,7 +35,7 @@
                             <field name="estado" widget="selection"/>
                             <button
                                 name="action_devolver"
-                                string="Devolver Equipamento"
+                                string="Devolver"
                                 type="object"
                                 class="btn-primary"
                                 invisible="estado != &quot;emprestado&quot;"
